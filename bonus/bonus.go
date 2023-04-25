@@ -17,21 +17,24 @@ func CalculateTowers(barLengths []int) (int, int) {
 	var altura, torres int
 	torres = 1
 	altura = 1
+	alturaAtual := 1
 	if len(barLengths) == 1 {
 		altura = 1
 		torres = len(barLengths)
 	}
 	for i := 0; i < len(barLengths)-1; i++ {
 		if barLengths[i] == barLengths[i+1] {
-			altura++
-
+			alturaAtual++
 		} else {
 			torres++
+			if alturaAtual > altura {
+				altura = alturaAtual
+			}
+			alturaAtual = 1
 		}
 	}
-	if altura > 20 {
-		altura = altura / 7
+	if alturaAtual > altura {
+		altura = alturaAtual
 	}
-
 	return altura, torres
 }
